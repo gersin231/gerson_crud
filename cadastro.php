@@ -38,7 +38,7 @@ if(isset($_POST['nome']))
     
     if(!empty($nome) && !empty($telefone) && !empty($email)&& !empty($senha)&& !empty($confSenha))
     {
-        $usuario->conectar("crud","localhost", "root","");
+        $usuario->conectar('crud','localhost', 'root','');
         if($usuario->msgErro == "")
         {
             if($senha == $confSenha)

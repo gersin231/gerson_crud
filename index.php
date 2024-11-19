@@ -31,7 +31,7 @@
 
         if (!empty($email) && !empty($senha)) {
             // Conectar ao banco de dados
-            $usuario->conectar("crud", "localhost", "root", "");
+            $usuario->conectar('crud', 'localhost', 'root', '');
             
             // Verifica se não houve erro na conexão
             if ($usuario->msgErro == "") {
