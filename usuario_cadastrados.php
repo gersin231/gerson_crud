@@ -1,14 +1,14 @@
 <?php
-// Inclui o arquivo da classe Usuario
+// inclui o arquivo da classe Usuario
 require_once 'usuario.php';
 
-// Cria uma nova instância da classe Usuario
+// cria uma nova instância da classe Usuario
 $usuario = new Usuario();
 
-// Conecta ao banco de dados
+// conecta ao banco de dados
 $usuario->conectar('crud', 'localhost', 'root', '');
 
-// Chama o método listarUsuarios para obter todos os usuários
+// chama o método listarUsuarios para obter todos os usuários
 $usuarios = $usuario->listarUsuarios();
 ?>
 
