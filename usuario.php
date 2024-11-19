@@ -8,17 +8,21 @@
             global $pdo;
 
             try{
-                $pdo = new PDO("mysql:dbname=".$nome.";host=" .$host, $usuario, $senha);
+                $this->pdo = new PDO("mysql:dbname=".$nome.";host=" .$host, $usuario, $senha);
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  // Configura para lançar exceções em erros
             }
             catch (PDOException $erro){
                 $msgErro = $erro->getMessage();
             }
         }
+        public function getpdo() {
+            return $this->pdo;
+        }
 
         public function cadastrar($nome, $telefone, $email, $senha){
             global $pdo;
 
-            $sql= $pdo->prepare("SELECT id_usuario from usuarios where email=:m");
+            $sql= $this->pdo->prepare("SELECT id_usuario from usuarios where email=:m");
             $sql->bindValue(":m",$email);
             $sql->execute();
             
@@ -26,7 +30,7 @@
                 return false;
             }
             else{
-                $sql=$pdo->prepare("INSERT INTO usuarios(nome,telefone,email,senha)
+                $sql=$this->pdo->prepare("INSERT INTO usuarios(nome,telefone,email,senha)
                 values (:n,:t,:e,:s)");
                 $sql->bindValue(":n",$nome);
                 $sql->bindValue(":t",$telefone);
@@ -37,14 +41,15 @@
             }
         }
         public function listarUsuarios() {
-            global $pdo;
-    
-            // Cria a consulta SQL para buscar todos os usuários
-            $sql = $pdo->prepare("SELECT id_usuario, nome, telefone, email FROM usuarios");
+            $sql = $this->pdo->prepare("SELECT id_usuario, nome, telefone, email FROM usuarios");
             $sql->execute();
-    
-            // Retorna todos os usuários encontrados no banco de dados
-            return $sql->fetchAll(PDO::FETCH_ASSOC);
+            return $sql->fetchAll(PDO::FETCH_ASSOC);  // retorna todos os usuários encontrados
+        }
+        public function excluir($id) {
+            global $pdo;
+            $sql = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
+            $sql->bindValue(':id', $id);
+            return $sql->execute(); // retorna true se a exclusão for bem-sucedida
         }
     
 
@@ -52,7 +57,7 @@
         {
             global $pdo;
 
-            $verificarEmaiSenha = $pdo ->prepare("SELECT id_usuario FROM usuarios WHERE email = :e AND senha = :s");
+            $verificarEmaiSenha = $this->pdo ->prepare("SELECT id_usuario FROM usuarios WHERE email = :e AND senha = :s");
             $verificarEmaiSenha ->bindValue(":e",$email);
             $verificarEmaiSenha ->bindValue(":s",md5($senha));
             $verificarEmaiSenha ->execute();

@@ -22,7 +22,7 @@ $usuarios = $usuario->listarUsuarios();
 <body>
     <h2>Lista de Usuários Cadastrados</h2>
 
-    <!-- Tabela para exibir os dados -->
+    <!-- tabela para exibir dados -->
     <table border="1" cellpadding="10">
         <thead>
             <tr>
@@ -30,24 +30,29 @@ $usuarios = $usuario->listarUsuarios();
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Email</th>
+                <th>Ações</th> <!-- coluna para os botões de ação -->
             </tr>
         </thead>
         <tbody>
             <?php
-            // Verifica se existem usuários cadastrados
+            // verifica se existem usuários cadastrados
             if (count($usuarios) > 0) {
-                // Exibe cada usuário em uma linha da tabela
+                // exibe cada usuário em uma linha da tabela
                 foreach ($usuarios as $usuario) {
                     echo "<tr>";
                     echo "<td>" . $usuario['id_usuario'] . "</td>";
                     echo "<td>" . $usuario['nome'] . "</td>";
                     echo "<td>" . $usuario['telefone'] . "</td>";
                     echo "<td>" . $usuario['email'] . "</td>";
+                    echo "<td>
+                            <a href='editar.php?id=" . $usuario['id_usuario'] . "'><button>Editar</button></a>
+                            <a href='excluir.php?id=" . $usuario['id_usuario'] . "'><button>Excluir</button></a>
+                          </td>";
                     echo "</tr>";
                 }
             } else {
-                // Caso não haja usuários, exibe uma mensagem
-                echo "<tr><td colspan='4'>Nenhum usuário cadastrado.</td></tr>";
+                // caso não haja usuários, exibe uma mensagem
+                echo "<tr><td colspan='5'>Nenhum usuário cadastrado.</td></tr>";
             }
             ?>
         </tbody>

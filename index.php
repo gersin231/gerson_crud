@@ -30,26 +30,26 @@
         $senha = $_POST['senha'];
 
         if (!empty($email) && !empty($senha)) {
-            // Conectar ao banco de dados
+            // conectar ao banco de dados
             $usuario->conectar('crud', 'localhost', 'root', '');
             
-            // Verifica se não houve erro na conexão
+            // verifica se não houve erro na conexão
             if ($usuario->msgErro == "") {
-                // Tenta fazer o login
+                // tenta fazer o login
                 if ($usuario->logar($email, $senha)) {
                     // Redireciona para a área privada em caso de sucesso
                     header("Location: usuario_cadastrados.php");
                     exit; // Garanta que o código após o redirecionamento não seja executado
                 } else {
-                    // Se falhar, exibe mensagem de erro
+                    // se falhar, exibe mensagem de erro
                     echo '<div id="msn-erro">Email e/ou senha estão incorretos.</div>';
                 }
             } else {
-                // Se houver erro na conexão, exibe a mensagem de erro
+                // se houver erro na conexão, exibe a mensagem de erro
                 echo '<div id="msn-erro">Erro: ' . $usuario->msgErro . '</div>';
             }
         } else {
-            // Se os campos estão vazios, exibe uma mensagem
+            // se os campos estão vazios, exibe uma mensagem
             echo '<div id="msn-erro">Por favor, preencha todos os campos.</div>';
         }
     }
