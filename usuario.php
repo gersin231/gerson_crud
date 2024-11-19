@@ -36,6 +36,17 @@
                 return true;
             }
         }
+        public function listarUsuarios() {
+            global $pdo;
+    
+            // Cria a consulta SQL para buscar todos os usuários
+            $sql = $pdo->prepare("SELECT id_usuario, nome, telefone, email FROM usuarios");
+            $sql->execute();
+    
+            // Retorna todos os usuários encontrados no banco de dados
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+    
 
         public function logar($email,$senha)
         {
@@ -54,6 +65,7 @@
             }
             else{return false;}
         }
+    
     }
     ?>
 

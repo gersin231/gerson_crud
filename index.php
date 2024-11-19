@@ -38,7 +38,7 @@
                 // Tenta fazer o login
                 if ($usuario->logar($email, $senha)) {
                     // Redireciona para a área privada em caso de sucesso
-                    header("Location: areaprivada.php");
+                    header("Location: ususario_cadastrados.php");
                     exit; // Garanta que o código após o redirecionamento não seja executado
                 } else {
                     // Se falhar, exibe mensagem de erro
