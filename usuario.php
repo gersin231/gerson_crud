@@ -46,8 +46,7 @@
             return $sql->fetchAll(PDO::FETCH_ASSOC);  // retorna todos os usuários encontrados
         }
         public function excluir($id) {
-            global $pdo;
-            $sql = $pdo->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
+            $sql = $this->pdo->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
             $sql->bindValue(':id', $id);
             return $sql->execute(); // retorna true se a exclusão for bem-sucedida
         }
