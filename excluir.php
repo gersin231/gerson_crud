@@ -2,7 +2,7 @@
 require_once 'usuario.php';
 $usuario = new Usuario();
 
-#verifica se o ID foi passado pela URL
+#verificar se o parametro id foi passado pela URL
 if (isset($_GET['id'])) {
     $id_usuario = $_GET['id'];
 
