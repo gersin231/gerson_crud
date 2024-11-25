@@ -25,7 +25,7 @@ if (isset($_GET['id'])) {
     $usuario_data = $sql->fetch(PDO::FETCH_ASSOC);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // atualizar os dados do usuário com os dados do formulário
+        #atualizar os dados do usuário com os dados do formulário
         $nome = $_POST['nome'];
         $telefone = $_POST['telefone'];
         $email = $_POST['email'];
