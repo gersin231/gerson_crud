@@ -43,12 +43,12 @@
         public function listarUsuarios() {
             $sql = $this->pdo->prepare("SELECT id_usuario, nome, telefone, email FROM usuarios");
             $sql->execute();
-            return $sql->fetchAll(PDO::FETCH_ASSOC);  // retorna todos os usuários encontrados
+            return $sql->fetchAll(PDO::FETCH_ASSOC);  # retorna todos os usuários encontrados
         }
         public function excluir($id) {
             $sql = $this->pdo->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
             $sql->bindValue(':id', $id);
-            return $sql->execute(); // retorna true se a exclusão for bem-sucedida
+            return $sql->execute(); # retorna verdadeiro se a exclusão for bem-sucedida
         }
     
 
